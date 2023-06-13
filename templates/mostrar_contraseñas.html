@@ -1,0 +1,7 @@
+<h1>Contraseñas Guardadas</h1>
+{% for password in passwords %}
+<h3>Sitio: {{ password.sitio }}</h3>
+<p>Nombre de usuario: {{ password.username }}</p>
+<p>Contraseña: {{ password.password }}</p>
+<hr />
+{% endfor %}

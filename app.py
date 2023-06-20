@@ -136,5 +136,10 @@ def cerrar_sesion():
     session.pop('user_id', None)
     return redirect('/inicio_sesion')
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

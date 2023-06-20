@@ -1,7 +1,10 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
+<div class="logo-container">
+    <a href="/menu"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image"></a>
+</div>
 <h1>Menú Principal</h1>
 <ul>
-    <li><a href="/agregar_contraseña">Agregar nueva contraseña</a></li>
-    <li><a href="/mostrar_contraseñas">Mostrar contraseñas guardadas</a></li>
-    <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
+    <li><a class="a" href="/agregar_contraseña">Agregar nueva contraseña</a></li>
+    <li><a class="a" href="/mostrar_contraseñas">Mostrar contraseñas guardadas</a></li>
+    <li><a class="a" href="/cerrar_sesion">Cerrar sesión</a></li>
 </ul>

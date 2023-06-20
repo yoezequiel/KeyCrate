@@ -1,13 +1,39 @@
+/* Estilos para el contenedor del logo */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para la imagen del logo */
+.logo-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
 h1 {
     color: #333;
-    text-align: center;
-    margin-top: 50px;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 form {
     width: 400px;
     margin: 0 auto;
-    background-color: #fff;
+
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -42,7 +68,8 @@ button[type="submit"]:hover {
     background-color: #a04545;
 }
 
-p.error {
+p{
     color: red;
     margin-top: 10px;
+    text-align: center;
 }

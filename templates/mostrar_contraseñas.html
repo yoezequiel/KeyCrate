@@ -1,7 +1,20 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pass.css') }}">
+<div class="logo-container">
+    <a href="/menu"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image"></a>
+</div>
 <h1>Contraseñas Guardadas</h1>
-{% for password in passwords %}
-<h3>Sitio: {{ password.sitio }}</h3>
-<p>Nombre de usuario: {{ password.username }}</p>
-<p>Contraseña: {{ password.password }}</p>
-<hr />
-{% endfor %}
+
+<div class="site-cards-container">
+    {% for password in passwords %}
+    <div class="site-card">
+    <div class="site-card-front">
+        <h3>{{ password.sitio }}</h3>
+    </div>
+    <div class="site-card-back">
+        <h3>Sitio: {{ password.sitio }}</h3>
+        <p>Nombre de usuario: {{ password.username }}</p>
+        <p>Contraseña: {{ password.password }}</p>
+    </div>
+    </div>
+    {% endfor %}
+</div>

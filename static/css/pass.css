@@ -1,27 +1,13 @@
-.logo-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.logo-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    object-fit: cover;
-}
-
 .site-cards-container {
     perspective: 1000px;
-    width: 500px; /* Aumenta el ancho del contenedor para tener más espacio */
-    height: 300px; /* Aumenta la altura del contenedor para tener más espacio */
+    width: 500px auto; /* Aumenta el ancho del contenedor para tener más espacio */
+    height: 300px auto; /* Aumenta la altura del contenedor para tener más espacio */
     margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 body {
@@ -71,12 +57,13 @@ h1 {
 
 .site-card-back {
     background-color: #fff;
-    color: #4d4d4d;
+    color: #252525;
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 5px;
 }
 
 .site-card:hover .site-card-front {
@@ -97,14 +84,8 @@ p {
     text-align: center;
 }
 
-hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: none;
-    border-top: 1px solid #ccc;
-}
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
     .site-card {
         width: 90%;
         max-width: 400px;

@@ -44,6 +44,7 @@ def registro():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        password = request.form['password']
 
         if not username or not password:
             return render_template('registro.html', error='El nombre de usuario y/o la contraseña no pueden estar vacíos.')
@@ -91,7 +92,12 @@ def inicio_sesion():
 @app.route('/menu')
 def menu():
     if 'user_id' in session:
-        return render_template('menu.html')
+        conn = get_db_connection()
+        user_id = session['user_id']
+        passwords = conn.execute('SELECT * FROM passwords WHERE user_id = ?', (user_id,)).fetchall()
+        conn.close()
+
+        return render_template('mostrar_contraseñas.html', passwords=passwords)
 
     return redirect('/inicio_sesion')
 
@@ -113,21 +119,9 @@ def agregar_contraseña():
             conn.commit()
             conn.close()
 
-            return redirect('/mostrar_contraseñas')
+            return redirect('/menu')
 
         return render_template('agregar_contraseña.html')
-
-    return redirect('/inicio_sesion')
-
-@app.route('/mostrar_contraseñas')
-def mostrar_contraseñas():
-    if 'user_id' in session:
-        conn = get_db_connection()
-        user_id = session['user_id']
-        passwords = conn.execute('SELECT * FROM passwords WHERE user_id = ?', (user_id,)).fetchall()
-        conn.close()
-
-        return render_template('mostrar_contraseñas.html', passwords=passwords)
 
     return redirect('/inicio_sesion')
 

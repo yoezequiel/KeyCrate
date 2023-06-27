@@ -1,6 +1,9 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/404.css') }}">
-<div class="logo-container">
-    <a href="/menu"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image"></a>
-</div>
+{% extends 'base.html' %}
+
+{% block title %}KeyCrate{% endblock %}
+
+{% block content %}
 <h1>¡Error 404 - Página no encontrada!</h1>
     <p>Lo sentimos, la página que estás buscando no existe.</p>
+{% endblock %}

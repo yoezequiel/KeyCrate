@@ -1,0 +1,66 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="logo-container">
+        <a href="/">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image">
+        </a>
+    </div>
+    
+    {% block content %}
+
+    {% endblock %}
+
+    <script>
+        var storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        }
+    </script>
+
+    <style type="text/css">
+    .dark-theme {
+        /* Estilos para el tema oscuro */
+        background-color: #333;
+        color: #fff;
+    }
+
+    .dark-theme h1 {
+        /* Estilos para el título h1 en tema oscuro */
+        color: #fff;
+    }
+
+    .dark-theme p {
+        /* Estilos para los párrafos en tema oscuro */
+        color: #fff;
+    }
+
+    .dark-theme .button {
+        /* Estilos para los botones en tema oscuro */
+        background-color: #a04545;
+        color: #fff;
+    }
+    .dark-theme .button:hover {
+        /* Estilos para los botones en tema oscuro */
+        background-color: red;
+        color: #fff;
+    }
+    
+    .dark-theme .site-card-back{
+        background-color: #252525;
+        color: #fff;
+    }
+    
+    .dark-theme label {
+        display: block;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    </style>
+
+</body>
+</html>

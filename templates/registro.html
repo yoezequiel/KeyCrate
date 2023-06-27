@@ -1,15 +1,21 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/registro.css') }}">
-<div class="logo-container">
-    <a href="/menu"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image"></a>
-</div>
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
 <h1>Registro</h1>
 {% if error %}
 <p>{{ error }}</p>
 {% endif %}
 <form method="POST" action="/registro">
-    <label>Nombre de usuario:</label>
-    <input type="text" name="username" required />
-    <label>Contraseña:</label>
-    <input type="password" name="password" required />
+    <label>Correo Electronico:</label>
+    <input type="email" name="username" placeholder="Ingrese su Correo Electronico" required />
+    <label>Contraseña Maestra:</label>
+    <input type="password" name="password" placeholder="Ingrese contraseña Maestra" required />
+    <input type="password" name="password" placeholder="Nuevamente la contraseña Maestra" required />
     <button type="submit">Registrarse</button>
+    o
+    <a href="/inicio_sesion"><button type="button">Iniciar Sesion</button></a>
 </form>
+{% endblock %}

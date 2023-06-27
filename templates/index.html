@@ -1,10 +1,23 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-<div class="logo-container">
-    <a href="/menu"> <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image"></a>
-</div>
-<h1>Gestor de Contraseñas</h1>
-<p>Bienvenido al Gestor de Contraseñas. Por favor, selecciona una opción:</p>
+{% extends 'base.html' %}
+
+{% block title %}KeyCrate{% endblock %}
+
+{% block content %}
+<h1>KeyCrate</h1>
+<p>Bienvenido a mi gestor de contraseñas</p>
+<p>By: yoezequiel</p>
 <ul>
     <li><a href="/registro" class="button register-button">Registrarse</a></li>
     <li><a href="/inicio_sesion" class="button login-button">Iniciar sesión</a></li>
 </ul>
+
+<div class="theme-container">
+    <div class="theme-toggle">
+        <input type="checkbox" id="theme-switch" onclick="toggleTheme()">
+        <label for="theme-switch" class="toggle-label"></label>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

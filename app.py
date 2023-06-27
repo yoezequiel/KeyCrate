@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, session, redirect
 from config import SECRET_KEY
-
 import sqlite3
 import hashlib
 
@@ -92,6 +91,31 @@ def inicio_sesion():
 
     return render_template('inicio_sesion.html')
 
+
+@app.route('/recuperar_contraseña', methods=['GET', 'POST'])
+def recuperar_contraseña():
+    if request.method == 'POST':
+        username = request.form['username']
+        
+        # Verificar si el usuario existe en la base de datos
+        conn = get_db_connection()
+        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        conn.close()
+        
+        if user:
+            # implementar la lógica para enviar un correo electrónico con la contraseña al usuario
+            # usar bibliotecas como Flask-Mail o servicios de correo electrónico como SendGrid
+            
+            # Por ahora, simplemente muestra un mensaje de éxito
+            return render_template('recuperar_contraseña.html', success='Se ha enviado un correo electrónico con la contraseña.')
+        
+        return render_template('recuperar_contraseña.html', error='No se encontró ningún usuario con ese nombre de usuario.')
+
+    return render_template('recuperar_contraseña.html')
+
+
+
+
 @app.route('/menu')
 def menu():
     if 'user_id' in session:
@@ -128,6 +152,8 @@ def agregar_contraseña():
 
     return redirect('/inicio_sesion')
 
+
+
 @app.route('/cerrar_sesion')
 def cerrar_sesion():
     session.pop('user_id', None)
@@ -135,8 +161,7 @@ def cerrar_sesion():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html'), 404
-
+    return render_template('404.html'), 40
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

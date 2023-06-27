@@ -9,12 +9,21 @@
 <p>{{ error }}</p>
 {% endif %}
 <form method="POST" action="/inicio_sesion">
-    <label>Correo Electronico:</label>
-    <input type="email" name="username" placeholder="Ingrese su Correo Electronico" required />
-    <label>Contraseña Maestra:</label>
-    <input type="password" name="password" placeholder="Ingrese su contraseña Maestra" required />
-    <button type="submit">Iniciar sesión</button>
-    o
-    <a href="/registro"><button type="button">Registrarse</button></a>
+    <div>
+        <label>Correo Electrónico:</label>
+        <input type="email" name="username" placeholder="Ingrese su Correo Electrónico" required />
+    </div>
+    <div>
+        <label>Contraseña Maestra:</label>
+        <input type="password" name="password" placeholder="Ingrese su contraseña Maestra" required />
+    </div>
+    <div>
+        <button type="submit">Iniciar sesión</button>
+        o
+        <a href="/registro"><button type="button">Registrarse</button></a>
+    </div>
+    <div>
+        <a href="/recuperar_contraseña">¿Olvidaste tu contraseña?</a>
+    </div>
 </form>
 {% endblock %}

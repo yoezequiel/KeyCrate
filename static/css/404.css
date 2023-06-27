@@ -11,3 +11,14 @@ h1 {
 p {
     font-size: 18px;
 }
+
+@media (max-width: 400px) {
+    .logo-container {
+        top: 1%;
+        left: 1%;
+    }
+    .logo-image {
+        width: 50px;
+        height: 50px;
+    }
+}

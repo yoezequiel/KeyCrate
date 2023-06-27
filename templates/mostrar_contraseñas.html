@@ -5,6 +5,13 @@
 {% block title %}KeyCrate{% endblock %}
 
 {% block content %}
+
+<div class="profile-container">
+    <a href="/profile">
+        <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Logo" class="profile-image">
+    </a>
+</div>
+
 <h1>Menu</h1>
 <ul>
     <li>

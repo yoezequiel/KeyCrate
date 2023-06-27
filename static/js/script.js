@@ -5,3 +5,9 @@ function toggleTheme() {
     var isDarkMode = body.classList.contains('dark-theme');
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 }
+
+
+// Detectar si el dispositivo es táctil
+if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
+    document.documentElement.classList.add('mobile-touch');
+}

@@ -25,8 +25,25 @@
             <h3>Sitio: {{ password.sitio }}</h3>
             <p>Nombre de usuario: {{ password.username }}</p>
             <p>Contraseña: {{ password.password }}</p>
+            <button class="copy-button" onclick="copyToClipboard('{{ password.username }}')">Copiar nombre de usuario</button>
+            <button class="copy-button" onclick="copyToClipboard('{{ password.password }}')">Copiar contraseña</button>
+
         </div>
     </div>
     {% endfor %}
 </div>
+
+<script>
+    function copyToClipboard(text) {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        alert('Texto copiado al portapapeles: ' + text);
+    }
+</script>
+
+
 {% endblock %}

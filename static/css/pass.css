@@ -1,13 +1,14 @@
 .site-cards-container {
     perspective: 1000px;
-    width: 500px auto; /* Aumenta el ancho del contenedor para tener más espacio */
-    height: 300px auto; /* Aumenta la altura del contenedor para tener más espacio */
+    width: auto; /* Elimina el ancho fijo y deja que se ajuste automáticamente */
+    height: auto; /* Elimina la altura fija y deja que se ajuste automáticamente */
     margin: 20px auto;
     display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en dispositivos móviles */
     justify-content: center;
     align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 10px; /* Reduce el padding para dispositivos móviles */
+    padding-right: 10px; /* Reduce el padding para dispositivos móviles */
 }
 
 body {
@@ -20,7 +21,7 @@ body {
 
 h1 {
     color: #333;
-    font-size: 28px;
+    font-size: 24px; /* Reduce el tamaño de la fuente para dispositivos móviles */
     margin-bottom: 20px;
 }
 
@@ -30,9 +31,10 @@ h1 {
 
 .site-card {
     perspective: 1000px;
-    width: 300px;
+    width: 90%; /* Ajusta el ancho de las tarjetas al 90% del contenedor */
+    max-width: 400px; /* Establece un ancho máximo para las tarjetas */
     height: 200px;
-    margin: 0 10px; /* Reduce el margen horizontal para separar las tarjetas */
+    margin: 10px; /* Reduce el margen entre las tarjetas */
 }
 
 .site-card-front,
@@ -84,10 +86,55 @@ p {
     text-align: center;
 }
 
+.copy-button {
+    background-color: #4d4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copy-button:hover {
+    background-color: #333;
+}
+
 
 @media screen and (max-width: 600px) {
     .site-card {
         width: 90%;
-        max-width: 400px;
+        max-width: 100%; /* Establece el ancho máximo de las tarjetas al 100% */
     }
+}
+
+.site-card-front {
+    background-color: #4d4d4d;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.site-card-back {
+    background-color: #fff;
+    color: #252525;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+
+.mobile-touch .site-card-front {
+    /* Estilos para dispositivos móviles con toque */
+    transform: rotateY(180deg);
+}
+
+.mobile-touch .site-card-back {
+    /* Estilos para dispositivos móviles con toque */
+    transform: rotateY(0deg);
 }

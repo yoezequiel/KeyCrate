@@ -115,7 +115,6 @@ def recuperar_contraseña():
 
 
 
-
 @app.route('/menu')
 def menu():
     if 'user_id' in session:
@@ -127,6 +126,12 @@ def menu():
         return render_template('mostrar_contraseñas.html', passwords=passwords)
 
     return redirect('/inicio_sesion')
+
+@app.route('/profile')
+def profile():
+    if 'user_id' in session:
+        return render_template('profile.html')
+
 
 @app.route('/agregar_contraseña', methods=['GET', 'POST'])
 def agregar_contraseña():
@@ -158,6 +163,48 @@ def agregar_contraseña():
 def cerrar_sesion():
     session.pop('user_id', None)
     return redirect('/inicio_sesion')
+
+@app.route('/eliminar_cuenta')
+def eliminar_cuenta():
+    if 'user_id' in session:
+        return redirect('/confirmar_eliminacion')
+    
+    return redirect('/inicio_sesion')
+
+@app.route('/del_cuenta')
+def del_cuenta():
+    if 'user_id' in session:
+        conn = get_db_connection()
+        user_id = session['user_id']
+        
+        # Eliminar las claves asociadas al usuario
+        conn.execute('DELETE FROM passwords WHERE user_id = ?', (user_id,))
+        
+        # Eliminar el usuario
+        conn.execute('DELETE FROM users WHERE id = ?', (user_id,))
+        
+        conn.commit()
+        conn.close()
+        
+        session.pop('user_id', None)
+        return redirect('/registro')  # Redirige al formulario de registro después de eliminar la cuenta
+    
+    return redirect('/inicio_sesion')
+
+
+@app.route('/confirmar_eliminacion', methods=['GET', 'POST'])
+def confirmar_eliminacion():
+    if request.method == 'POST':
+        confirmation = request.form.get('confirmation')
+        
+        if confirmation == 'eliminar':
+            return redirect('/del_cuenta')
+        
+        return redirect('/profile')
+    
+    return render_template('confirmar_eliminacion.html')
+
+
 
 @app.errorhandler(404)
 def page_not_found(error):

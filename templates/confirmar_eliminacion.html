@@ -1,0 +1,16 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/config-del.css') }}">
+{% extends 'base.html' %}
+
+{% block title %}Seguro?{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<h2>Confirmar eliminación de cuenta</h2>
+<p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</p>
+<p>Para confirmar la eliminación, escribe "eliminar" en el siguiente campo:</p>
+<form action="/confirmar_eliminacion" method="POST">
+    <input type="text" name="confirmation" required>
+    <button type="submit" class="btn btn-danger">Confirmar eliminación</button>
+</form>
+{% endblock %}

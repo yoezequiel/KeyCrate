@@ -94,6 +94,10 @@ p {
     }
 }
 
+.dark-theme a{
+    color: blue;
+}
+
 /* Consulta de medios para pantallas de hasta 400px */
 @media (max-width: 400px) {
     .logo-container {

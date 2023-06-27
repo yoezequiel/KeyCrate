@@ -1,38 +1,27 @@
-/* Estilos generales */
+/* Estilos base */
 body {
     font-family: Arial, sans-serif;
+    padding: 20px;
     text-align: center;
 }
 
 h2 {
-    color: #333;
+    margin-top: 0;
 }
 
-.error {
-    color: #ff0000;
+p {
+    margin-bottom: 10px;
 }
 
-.success {
-    color: #008000;
-}
-
-/* Estilos del formulario */
 form {
-    width: 100%;
-    max-width: 400px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-input[type="email"] {
+input[type="text"]{
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -40,7 +29,7 @@ input[type="email"] {
     margin-bottom: 20px;
 }
 
-input[type="submit"] {
+button[type="submit"]{
     background-color: red;
     color: white;
     padding: 10px 20px;
@@ -50,14 +39,45 @@ input[type="submit"] {
     font-size: 16px;
 }
 
-input[type="submit"]:hover {
+button[type="submit"]:hover {
     background-color: #a04545;
 }
 
-/* Media queries */
+button {
+    padding: 10px 20px;
+    background-color: #f44336;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Estilos responsive */
+
 @media (max-width: 600px) {
     form {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        margin-bottom: 15px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    body {
         padding: 10px;
+    }
+
+    button {
+        padding: 8px 16px;
     }
     .logo-container {
         top: 1%;
@@ -67,9 +87,5 @@ input[type="submit"]:hover {
     .logo-image {
         width: 100px;
         height: 100px;
-    }
-    input[type="email"], input[type="submit"] {
-        width: 100%;
-        margin-bottom: 10px;
     }
 }

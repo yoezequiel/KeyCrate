@@ -83,7 +83,7 @@ p{
 }
 
 /* Consulta de medios para pantallas de hasta 400px */
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     .logo-container {
         top: 1%;
         left: 1%;

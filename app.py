@@ -158,6 +158,16 @@ def agregar_contraseña():
     return redirect('/inicio_sesion')
 
 
+@app.route('/eliminar_contraseña/<int:password_id>', methods=['POST'])
+def eliminar_contraseña_id(password_id):
+    if 'user_id' in session:
+        conn = get_db_connection()
+        user_id = session['user_id']
+        conn.execute('DELETE FROM passwords WHERE id = ? AND user_id = ?', (password_id, user_id))
+        conn.commit()
+        conn.close()
+
+    return redirect('/menu')
 
 @app.route('/cerrar_sesion')
 def cerrar_sesion():
@@ -203,7 +213,6 @@ def confirmar_eliminacion():
         return redirect('/profile')
     
     return render_template('confirmar_eliminacion.html')
-
 
 
 @app.errorhandler(404)

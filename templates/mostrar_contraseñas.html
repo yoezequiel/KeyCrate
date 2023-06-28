@@ -33,7 +33,9 @@
             <p>Contraseña: {{ password.password }}</p>
             <button class="copy-button" onclick="copyToClipboard('{{ password.username }}')">Copiar nombre de usuario</button>
             <button class="copy-button" onclick="copyToClipboard('{{ password.password }}')">Copiar contraseña</button>
-
+            <form method="post" action="/eliminar_contraseña/{{ password.id }}" style="display: inline;">
+                <button type="submit" class="delete-button">Eliminar</button>
+            </form>
         </div>
     </div>
     {% endfor %}
@@ -50,6 +52,5 @@
         alert('Texto copiado al portapapeles: ' + text);
     }
 </script>
-
 
 {% endblock %}

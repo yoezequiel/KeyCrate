@@ -1,17 +1,16 @@
 .site-cards-container {
     perspective: 1000px;
-    width: auto; /* Elimina el ancho fijo y deja que se ajuste automáticamente */
-    height: auto; /* Elimina la altura fija y deja que se ajuste automáticamente */
+    width: auto;
+    height: auto;
     margin: 20px auto;
     display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en dispositivos móviles */
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding-left: 10px; /* Reduce el padding para dispositivos móviles */
-    padding-right: 10px; /* Reduce el padding para dispositivos móviles */
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-/* Estilos para el perfil en la esquina superior izquierda */
 .profile-container {
     position: absolute;
     top: 20px;
@@ -20,7 +19,6 @@
     align-items: center;
 }
 
-/* Estilos para la imagen del perfil */
 .profile-image {
     width: 100px;
     height: 100px;
@@ -39,20 +37,17 @@ body {
 
 h1 {
     color: #333;
-    font-size: 24px; /* Reduce el tamaño de la fuente para dispositivos móviles */
+    font-size: 24px;
     margin-bottom: 20px;
-}
-
-h1 {
     text-align: center;
 }
 
 .site-card {
     perspective: 1000px;
-    width: 90%; /* Ajusta el ancho de las tarjetas al 90% del contenedor */
-    max-width: 400px; /* Establece un ancho máximo para las tarjetas */
-    height: 200px;
-    margin: 10px; /* Reduce el margen entre las tarjetas */
+    width: 90%;
+    max-width: 400px;
+    height: 250px; /* Ajusta la altura de ambas tarjetas */
+    margin: 10px;
 }
 
 .site-card-front,
@@ -84,6 +79,7 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 5px;
+    height: 250px;
 }
 
 .site-card:hover .site-card-front {
@@ -114,64 +110,41 @@ p {
     cursor: pointer;
 }
 
+.delete-button {
+    background-color: rgb(255, 128, 0);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .copy-button:hover {
     background-color: #333;
 }
 
-.site-card-front {
-    background-color: #4d4d4d;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.site-card-back {
-    background-color: #fff;
-    color: #252525;
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-}
-
-
 .mobile-touch .site-card-front {
-    /* Estilos para dispositivos móviles con toque */
     transform: rotateY(180deg);
 }
 
 .mobile-touch .site-card-back {
-    /* Estilos para dispositivos móviles con toque */
     transform: rotateY(0deg);
 }
 
 @media (max-width: 400px) {
-    .logo-container {
-        top: 1%;
-        left: 1%;
-    }
-    .logo-image {
-        width: 50px;
-        height: 50px;
-    }
     .profile-container {
-        position: absolute;
         top: 1%;
         right: 1%;
-        display: flex;
-        align-items: center;
     }
-    
-    /* Estilos para la imagen del perfil */
+
     .profile-image {
         width: 50px;
         height: 50px;
-        border-radius: 50%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        object-fit: cover;
+    }
+
+    .site-card-back {
+        padding: 10px; /* Ajusta el padding para dispositivos móviles */
+        height: 300px; /* Ajusta la altura para dispositivos móviles según tu preferencia */
     }
 }

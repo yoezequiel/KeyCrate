@@ -45,7 +45,8 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -117,4 +118,25 @@ p {
     form {
         padding: 10px;
     }
+}
+
+
+.password-input {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-toggle i {
+    color: #888;
+}
+
+.password-toggle:hover i {
+    color: #333;
 }

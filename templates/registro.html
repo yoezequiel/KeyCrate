@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/registro.css') }}">
 {% extends 'base.html' %}
 
@@ -12,10 +13,23 @@
     <label>Correo Electronico:</label>
     <input type="email" name="username" placeholder="Ingrese su Correo Electronico" required />
     <label>Contraseña Maestra:</label>
-    <input type="password" name="password" placeholder="Ingrese contraseña Maestra" required />
-    <input type="password" name="password" placeholder="Repite la contraseña Maestra" required />
-    <button type="submit">Registrarse</button>
+    <div class="password-input">
+        <input type="password" name="password" id="password" placeholder="Ingrese contraseña Maestra" required />
+        <span class="password-toggle" onclick="togglePasswordVisibility('password')">
+            <i class="far fa-eye"></i>
+        </span>
+    </div>
+    <div class="password-input">
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Repite la contraseña Maestra" required />
+        <span class="password-toggle" onclick="togglePasswordVisibility('confirm_password')">
+            <i class="far fa-eye"></i>
+        </span>
+    </div>
+    <button type="submit" onclick="return validatePasswords()">Registrarse</button>
     o
     <a href="/inicio_sesion"><button type="button">Iniciar Sesion</button></a>
 </form>
+
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+
 {% endblock %}

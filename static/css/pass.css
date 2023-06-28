@@ -143,8 +143,27 @@ p {
         height: 50px;
     }
 
+    .site-card-front,
     .site-card-back {
-        padding: 10px; /* Ajusta el padding para dispositivos móviles */
-        height: 300px; /* Ajusta la altura para dispositivos móviles según tu preferencia */
+        padding: 10px;
+        height: 230px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .copy-button,
+    .delete-button {
+        padding: 8px 16px;
+        font-size: 12px;
     }
 }

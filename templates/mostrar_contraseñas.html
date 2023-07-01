@@ -24,11 +24,16 @@
 <div class="site-cards-container">
     {% for password in passwords %}
     <div class="site-card">
+        {% if password.logo_path %}
+        <div class="site-card-front" style="background-image: url('{{ password.logo_path }}'); background-size: contain; background-repeat: no-repeat;
+        background-position: center; background-position: center;"></div>
+        {% else %}
         <div class="site-card-front">
             <h3>{{ password.sitio }}</h3>
         </div>
+        {% endif %}
         <div class="site-card-back">
-            <h3>Sitio: {{ password.sitio }}</h3>
+            <h4>Sitio: {{ password.sitio }}</h4>
             <p>Nombre de usuario: {{ password.username }}</p>
             <p>Contraseña: {{ password.password }}</p>
             <button class="copy-button" onclick="copyToClipboard('{{ password.username }}')">Copiar nombre de usuario</button>
@@ -40,6 +45,7 @@
     </div>
     {% endfor %}
 </div>
+
 
 <script>
     function copyToClipboard(text) {

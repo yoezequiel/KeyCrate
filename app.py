@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, session, redirect
 from config import SECRET_KEY
+from favicon import get as get_favicon
 import sqlite3
 import hashlib
-
+from urllib.parse import urlparse
 
 app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static')
@@ -120,12 +121,50 @@ def menu():
     if 'user_id' in session:
         conn = get_db_connection()
         user_id = session['user_id']
-        passwords = conn.execute('SELECT * FROM passwords WHERE user_id = ?', (user_id,)).fetchall()
+        rows = conn.execute('SELECT * FROM passwords WHERE user_id = ?', (user_id,)).fetchall()
         conn.close()
+
+        passwords = []
+        for row in rows:
+            password = dict(row)
+            domain = password['sitio']
+            logo_keyword = None
+
+            # Buscar coincidencias de palabras clave
+            if 'google' in domain:
+                logo_keyword = 'google'
+            elif 'facebook' in domain:
+                logo_keyword = 'facebook'
+            elif 'amazon' in domain:
+                logo_keyword = 'amazon'
+            elif 'dropbox' in domain:
+                logo_keyword = 'dropbox'
+            elif 'linkedin' in domain:
+                logo_keyword = 'linkedin'
+            elif 'microsoft' in domain:
+                logo_keyword ='microsoft'
+            elif 'netflix' in domain:
+                logo_keyword = 'netflix'
+            elif 'twitter' in domain:
+                logo_keyword = 'twitter'
+            elif 'youtube' in domain:
+                logo_keyword = 'youtube'
+            # Agregar más casos para otras palabras clave
+
+            # Construir la ruta del logotipo correspondiente a la palabra clave
+            if logo_keyword:
+                logo_path = f'static/img/logos/{logo_keyword}.png'
+                password['logo_path'] = logo_path
+            else:
+            # En caso de no haber una coincidencia de palabra clave, puedes establecer un logotipo predeterminado o dejarlo en blanco
+                password['logo_path'] = ''  # O establecer un logotipo predeterminado: 'static/img/logos/default.jpg'
+
+            passwords.append(password)
 
         return render_template('mostrar_contraseñas.html', passwords=passwords)
 
     return redirect('/inicio_sesion')
+
 
 @app.route('/profile')
 def profile():

@@ -58,7 +58,7 @@ def registro():
         user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         if user:
             conn.close()
-            return render_template('registro.html', error='El nombre de usuario ya está en uso. Por favor, elija otro.')
+            return render_template('registro.html', error='El nombre de usuario ya está en uso. Por favor, elije otro.')
 
         conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
         conn.commit()
@@ -157,7 +157,7 @@ def menu():
                 password['logo_path'] = logo_path
             else:
             # En caso de no haber una coincidencia de palabra clave, puedes establecer un logotipo predeterminado o dejarlo en blanco
-                password['logo_path'] = ''  # O establecer un logotipo predeterminado: 'static/img/logos/default.jpg'
+                password['logo_path'] = ''  # O establecer un logotipo predeterminado: 'static/img/logos/default.png'
 
             passwords.append(password)
 

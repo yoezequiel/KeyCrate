@@ -6,8 +6,13 @@ function toggleTheme() {
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var isDarkMode = localStorage.getItem('theme') === 'dark';
+    var body = document.getElementsByTagName('body')[0];
+    if (isDarkMode) {
+        body.classList.add('dark-theme');
+    }
 
-// Detectar si el dispositivo es táctil
-if ('ontouchstart' in window || navigator.msMaxTouchPoints) {
-    document.documentElement.classList.add('mobile-touch');
-}
+    var themeSwitch = document.getElementById('theme-switch');
+    themeSwitch.checked = isDarkMode;
+});

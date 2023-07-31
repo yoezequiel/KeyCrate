@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static')
-app.secret_key = 'SECRET_KEY'  # Clave secreta para la sesión
+app.secret_key = SECRET_KEY
 
 def get_db_connection():
     conn = sqlite3.connect('gestor_contraseñas.db')
@@ -259,4 +259,4 @@ def page_not_found(error):
     return render_template('404.html'), 40
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

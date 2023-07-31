@@ -4,6 +4,7 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/img/logo.png">
 </head>
 <body>
     <div class="logo-container">
@@ -11,9 +12,7 @@
             <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image">
         </a>
     </div>
-    
     {% block content %}
-
     {% endblock %}
 
     <script>

@@ -15,7 +15,9 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     object-fit: cover;
 }
-
+.toggle-label{
+    border: 1px solid darkgray;
+}
 /* styles.css */
 body {
     font-family: Arial, sans-serif;

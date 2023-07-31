@@ -1,13 +1,12 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css') }}">
-
 {% extends 'base.html' %}
 
-{% block title %}Perfil{% endblock %}
+{% block head %}
+    <title>Perfil</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock head %}
 
 {% block content %}
-
-<h1>Perfil</h1>
-
-<a class="a" href="/cerrar_sesion">Cerrar sesión</a>
-<a class="a" href="/eliminar_cuenta">Eliminar Cuenta</a>
+    <h1>Perfil</h1>
+    <a class="a" href="/cerrar_sesion">Cerrar sesión</a>
+    <a class="a" href="/eliminar_cuenta">Eliminar Cuenta</a>
 {% endblock %}

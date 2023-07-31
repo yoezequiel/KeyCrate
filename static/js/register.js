@@ -13,7 +13,6 @@ function togglePasswordVisibility(inputId) {
     }
 }
 
-
 function validatePasswords() {
     var password = document.getElementById('password').value;
     var confirmPassword = document.getElementById('confirm_password').value;

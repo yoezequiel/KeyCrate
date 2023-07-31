@@ -1,69 +1,73 @@
-<!-- base.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" href="/static/img/logo.png">
+    {% block head %}
+    {% endblock head %}
 </head>
 <body>
-    <div class="logo-container">
-        <a href="/">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo-image">
-        </a>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">KeyCrate</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Inicio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     {% block content %}
     {% endblock %}
 
+    <!--MODO OSCURO-->
+    <script src="https://kit.fontawesome.com/87f8a4afeb.js" crossorigin="anonymous"></script>
     <script>
         var storedTheme = localStorage.getItem('theme');
         if (storedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
+            document.body.classList.add('dark-theme');
         }
     </script>
-
     <style type="text/css">
-    .dark-theme {
-        /* Estilos para el tema oscuro */
-        background-color: #333;
-        color: #fff;
-    }
-
-    .dark-theme h1 {
-        /* Estilos para el título h1 en tema oscuro */
-        color: #fff;
-    }
-    
-    .dark-theme h2{
-        color: #fff;
-    }
-
-    .dark-theme p {
-        /* Estilos para los párrafos en tema oscuro */
-        color: #fff;
-    }
-
-    .dark-theme .button {
-        /* Estilos para los botones en tema oscuro */
-        background-color: #a04545;
-        color: #fff;
-    }
-    .dark-theme .button:hover {
-        /* Estilos para los botones en tema oscuro */
-        background-color: red;
-        color: #fff;
-    }
-    
-    .dark-theme .site-card-back{
-        background-color: #252525;
-        color: #fff;
-    }
-    
-    .dark-theme label {
-        display: block;
-        margin-bottom: 10px;
-        color: #fff;
-    }             
+        .dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+        .dark-theme h1 {
+            color: #fff;
+        }
+        .dark-theme h2 {
+            color: #fff;
+        }
+        .dark-theme p {
+            color: #fff;
+        }
+        .dark-theme .button {
+            background-color: #a04545;
+            color: #fff;
+        }
+        .dark-theme .button:hover {
+            background-color: red;
+            color: #fff;
+        }
+        .dark-theme .site-card-back {
+            background-color: #252525;
+            color: #fff;
+        }
+        .dark-theme label {
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }             
     </style>
 </body>
 </html>

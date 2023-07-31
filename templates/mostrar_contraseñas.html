@@ -1,14 +1,16 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pass.css') }}"/>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}"/>
 {% extends 'base.html' %}
 
-{% block title %}KeyCrate{% endblock %}
+{% block head %}
+    <title>Ver contraseñas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pass.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
+{% endblock head %}
 
 {% block content %}
 
 <div class="profile-container">
     <a href="/profile">
-        <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Logo" class="profile-image">
+        <img src="{{ url_for('static', filename='img/profile.jpg') }}" alt="Profile" class="profile-image">
     </a>
 </div>
 
@@ -26,7 +28,7 @@
     <div class="site-card">
         {% if password.logo_path %}
         <div class="site-card-front" style="background-image: url('{{ password.logo_path }}'); background-size: contain; background-repeat: no-repeat;
-        background-position: center; background-position: center;"></div>
+        background-position: center;"></div>
         {% else %}
         <div class="site-card-front">
             <h3>{{ password.sitio }}</h3>
@@ -45,7 +47,6 @@
     </div>
     {% endfor %}
 </div>
-
 
 <script>
     function copyToClipboard(text) {

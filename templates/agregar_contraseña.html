@@ -1,20 +1,22 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/add-pass.css') }}">
 {% extends 'base.html' %}
 
-{% block title %}Agregar Contraseña{% endblock %}
+{% block head %}
+    <title>Agregar Contraseña</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/add-pass.css') }}">
+{% endblock head %}
 
 {% block content %}
-<h1>Agregar Contraseña</h1>
-{% if error %}
-<p>{{ error }}</p>
-{% endif %}
-<form method="POST" action="/agregar_contraseña">
-    <label>Sitio o servicio:</label>
-    <input type="text" name="sitio" placeholder="Ingrese la URL del sitio web" required />
-    <label>Nombre de usuario:</label>
-    <input type="text" name="username" placeholder="Ingrese su username del sitio web" required />
-    <label>Contraseña:</label>
-    <input type="password" name="password" placeholder="Ingrese su contraseña del sitio web" required />
-    <button type="submit">Guardar</button>
-</form>
+    <h1>Agregar Contraseña</h1>
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="/agregar_contraseña">
+        <label for="sitio">Sitio o servicio:</label>
+        <input type="text" id="sitio" name="sitio" placeholder="Ingrese la URL del sitio web" required>
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario del sitio web" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña del sitio web" required>
+        <button type="submit">Guardar</button>
+    </form>
 {% endblock %}

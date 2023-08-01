@@ -132,6 +132,8 @@ def menu():
 def profile():
     if 'user_id' in session:
         return render_template('profile.html')
+    else:
+        return render_template('index.html')
 
 @app.route('/agregar_contraseña', methods=['GET', 'POST'])
 def agregar_contraseña():
@@ -151,7 +153,6 @@ def agregar_contraseña():
             return redirect('/menu')
         return render_template('agregar_contraseña.html')
     return redirect('/inicio_sesion')
-
 
 @app.route('/eliminar_contraseña/<int:password_id>', methods=['POST'])
 def eliminar_contraseña_id(password_id):

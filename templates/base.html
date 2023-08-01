@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="icon" href="/static/img/logo.png">
     {% block head %}
     {% endblock head %}
@@ -22,13 +23,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Inicio</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="theme-container">
+                            <div class="theme-toggle">
+                                <input type="checkbox" id="theme-switch" onclick="toggleTheme()">
+                                <label for="theme-switch" class="toggle-label">
+                                    <span class="sun-icon"><i class="fa-regular fa-sun fa-lg"></i></span>
+                                    <span class="moon-icon"><i class="fa-regular fa-moon fa-lg"></i></span>
+                                </label>
+                            </div>
+                        </div>                                             
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
     {% block content %}
     {% endblock %}
-
     <!--MODO OSCURO-->
     <script src="https://kit.fontawesome.com/87f8a4afeb.js" crossorigin="anonymous"></script>
     <script>
@@ -37,37 +51,6 @@
             document.body.classList.add('dark-theme');
         }
     </script>
-    <style type="text/css">
-        .dark-theme {
-            background-color: #333;
-            color: #fff;
-        }
-        .dark-theme h1 {
-            color: #fff;
-        }
-        .dark-theme h2 {
-            color: #fff;
-        }
-        .dark-theme p {
-            color: #fff;
-        }
-        .dark-theme .button {
-            background-color: #a04545;
-            color: #fff;
-        }
-        .dark-theme .button:hover {
-            background-color: red;
-            color: #fff;
-        }
-        .dark-theme .site-card-back {
-            background-color: #252525;
-            color: #fff;
-        }
-        .dark-theme label {
-            display: block;
-            margin-bottom: 10px;
-            color: #fff;
-        }             
-    </style>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

@@ -1,2 +1,3 @@
 config.py
-gestor_contraseñas.db
+env/
+__pycache__/

@@ -12,7 +12,7 @@ body {
 
 h1 {
     color: #333;
-    font-size: 30px;
+    font-size: 50px;
     margin-bottom: 20px;
 }
 
@@ -57,7 +57,21 @@ a:hover {
 .login-button {
     margin-bottom: 10px;
 }
+.info{
+    max-width: 70ch;
+    font-size: 24px;
+}
 
+.main{
+    display: flex;
+    justify-content: center;
+}
+
+footer p{
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+}
 
 @media (max-width: 400px) {
     .logo-container {
@@ -70,3 +84,4 @@ a:hover {
         height: 50px;
     }
 }
+

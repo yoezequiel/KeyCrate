@@ -120,7 +120,7 @@ def menu():
             elif 'youtube' in domain:
                 logo_keyword = 'youtube'
             if logo_keyword:
-                logo_path = f'static/img/logos/{logo_keyword}.png'
+                logo_path = f'static/img/logos/{logo_keyword}.webp'
                 password['logo_path'] = logo_path
             else:
                 password['logo_path'] = ''

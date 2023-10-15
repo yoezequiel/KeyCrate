@@ -25,7 +25,7 @@ body {
     padding: 0;
     text-align: center;
 }
-/* Estilos para el título */
+
 h1 {
     color: #333;
     font-size: 40px;
@@ -39,13 +39,11 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Estilos para la lista */
 ul {
     list-style-type: none;
     padding: 0;
 }
 
-/* Estilos para los enlaces */
 .a {
     display: inline-block;
     padding: 8px 16px;
@@ -66,10 +64,12 @@ ul {
         top: 1%;
         left: 1%;
     }
+
     .logo-image {
         width: 50px;
         height: 50px;
     }
+
     .profile-image {
         width: 50px;
         height: 50px;

@@ -1,19 +1,20 @@
-{% extends 'base.html' %}
-
-{% block head %}
-    <title>Ver contraseñas</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pass.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
-{% endblock head %}
-
-{% block content %}
-
-
+{% extends 'base.html' %} {% block head %}
+<title>Ver contraseñas</title>
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='css/pass.css') }}" />
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='css/menu.css') }}" />
+{% endblock head %} {% block content %}
 
 <h1>Menu</h1>
 <ul>
     <li>
         <a class="a" href="/agregar_contraseña">Agregar nueva contraseña</a>
+        <a class="a" href="/generar_contraseña">Generar contraseña</a>
     </li>
 </ul>
 
@@ -23,7 +24,9 @@
     {% for password in passwords %}
     <div class="site-card">
         {% if password.logo_path %}
-        <div class="site-card-front" style="background-image: url('{{ password.logo_path }}'); background-size: contain; background-repeat: no-repeat;
+        <div
+            class="site-card-front"
+            style="background-image: url('{{ password.logo_path }}'); background-size: contain; background-repeat: no-repeat;
         background-position: center;"></div>
         {% else %}
         <div class="site-card-front">
@@ -34,9 +37,20 @@
             <h4>Sitio: {{ password.sitio }}</h4>
             <p>Nombre de usuario: {{ password.username }}</p>
             <p>Contraseña: {{ password.password }}</p>
-            <button class="copy-button" onclick="copyToClipboard('{{ password.username }}')">Copiar nombre de usuario</button>
-            <button class="copy-button" onclick="copyToClipboard('{{ password.password }}')">Copiar contraseña</button>
-            <form method="post" action="/eliminar_contraseña/{{ password.id }}" style="display: inline;">
+            <button
+                class="copy-button"
+                onclick="copyToClipboard('{{ password.username }}')">
+                Copiar nombre de usuario
+            </button>
+            <button
+                class="copy-button"
+                onclick="copyToClipboard('{{ password.password }}')">
+                Copiar contraseña
+            </button>
+            <form
+                method="post"
+                action="/eliminar_contraseña/{{ password.id }}"
+                style="display: inline">
                 <button type="submit" class="delete-button">Eliminar</button>
             </form>
         </div>
@@ -46,13 +60,13 @@
 
 <script>
     function copyToClipboard(text) {
-        const el = document.createElement('textarea');
+        const el = document.createElement("textarea");
         el.value = text;
         document.body.appendChild(el);
         el.select();
-        document.execCommand('copy');
+        document.execCommand("copy");
         document.body.removeChild(el);
-        alert('Texto copiado al portapapeles: ' + text);
+        alert("Texto copiado al portapapeles: " + text);
     }
 </script>
 

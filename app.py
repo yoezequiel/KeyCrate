@@ -1,3 +1,5 @@
+import string
+import random
 from flask import Flask, render_template, request, session, redirect
 from config import SECRET_KEY
 from favicon import get as get_favicon
@@ -9,10 +11,12 @@ app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = SECRET_KEY
 
+
 def get_db_connection():
     conn = sqlite3.connect('KeyCrate.db')
     conn.row_factory = sqlite3.Row
     return conn
+
 
 def create_tables():
     conn = get_db_connection()
@@ -36,9 +40,22 @@ def create_tables():
     conn.commit()
     conn.close()
 
+
+def generate_password(length, numbers, letters, symbols):
+    password_characters = ''
+    if numbers == 'on':
+        password_characters += string.digits
+    if letters == 'on':
+        password_characters += string.ascii_letters
+    if symbols == 'on':
+        password_characters += string.punctuation
+    return ''.join(random.choice(password_characters) for i in range(int(length)))
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
@@ -50,17 +67,21 @@ def registro():
             return render_template('registro.html', error='El nombre de usuario y/o la contraseña no pueden estar vacíos.')
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         conn = get_db_connection()
-        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        user = conn.execute(
+            'SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         if user:
             conn.close()
             return render_template('registro.html', error='El nombre de usuario ya está en uso. Por favor, elije otro.')
-        conn.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+        conn.execute('INSERT INTO users (username, password) VALUES (?, ?)',
+                     (username, hashed_password))
         conn.commit()
-        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        user = conn.execute(
+            'SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         session['user_id'] = user['id']
         conn.close()
         return redirect('/menu')
     return render_template('registro.html')
+
 
 @app.route('/inicio_sesion', methods=['GET', 'POST'])
 def inicio_sesion():
@@ -69,7 +90,8 @@ def inicio_sesion():
         password = request.form['password']
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         conn = get_db_connection()
-        user = conn.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, hashed_password)).fetchone()
+        user = conn.execute('SELECT * FROM users WHERE username = ? AND password = ?',
+                            (username, hashed_password)).fetchone()
         conn.close()
         if user:
             session['user_id'] = user['id']
@@ -77,24 +99,28 @@ def inicio_sesion():
         return render_template('inicio_sesion.html', error='Nombre de usuario o contraseña incorrectos.')
     return render_template('inicio_sesion.html')
 
+
 @app.route('/recuperar_contraseña', methods=['GET', 'POST'])
 def recuperar_contraseña():
     if request.method == 'POST':
         username = request.form['username']
         conn = get_db_connection()
-        user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        user = conn.execute(
+            'SELECT * FROM users WHERE username = ?', (username,)).fetchone()
         conn.close()
         if user:
             return render_template('recuperar_contraseña.html', success='Se ha enviado un correo electrónico con la contraseña.')
         return render_template('recuperar_contraseña.html', error='No se encontró ningún usuario con ese nombre de usuario.')
     return render_template('recuperar_contraseña.html')
 
+
 @app.route('/menu')
 def menu():
     if 'user_id' in session:
         conn = get_db_connection()
         user_id = session['user_id']
-        rows = conn.execute('SELECT * FROM passwords WHERE user_id = ?', (user_id,)).fetchall()
+        rows = conn.execute(
+            'SELECT * FROM passwords WHERE user_id = ?', (user_id,)).fetchall()
         conn.close()
         passwords = []
         for row in rows:
@@ -112,7 +138,7 @@ def menu():
             elif 'linkedin' in domain:
                 logo_keyword = 'linkedin'
             elif 'microsoft' in domain:
-                logo_keyword ='microsoft'
+                logo_keyword = 'microsoft'
             elif 'netflix' in domain:
                 logo_keyword = 'netflix'
             elif 'twitter' in domain:
@@ -128,12 +154,14 @@ def menu():
         return render_template('mostrar_contraseñas.html', passwords=passwords)
     return redirect('/inicio_sesion')
 
+
 @app.route('/profile')
 def profile():
     if 'user_id' in session:
         return render_template('profile.html')
     else:
         return render_template('index.html')
+
 
 @app.route('/agregar_contraseña', methods=['GET', 'POST'])
 def agregar_contraseña():
@@ -147,33 +175,38 @@ def agregar_contraseña():
             conn = get_db_connection()
             user_id = session['user_id']
             conn.execute('INSERT INTO passwords (user_id, sitio, username, password) VALUES (?, ?, ?, ?)',
-                        (user_id, sitio, username, password))
+                         (user_id, sitio, username, password))
             conn.commit()
             conn.close()
             return redirect('/menu')
         return render_template('agregar_contraseña.html')
     return redirect('/inicio_sesion')
 
+
 @app.route('/eliminar_contraseña/<int:password_id>', methods=['POST'])
 def eliminar_contraseña_id(password_id):
     if 'user_id' in session:
         conn = get_db_connection()
         user_id = session['user_id']
-        conn.execute('DELETE FROM passwords WHERE id = ? AND user_id = ?', (password_id, user_id))
+        conn.execute(
+            'DELETE FROM passwords WHERE id = ? AND user_id = ?', (password_id, user_id))
         conn.commit()
         conn.close()
     return redirect('/menu')
+
 
 @app.route('/cerrar_sesion')
 def cerrar_sesion():
     session.pop('user_id', None)
     return redirect('/inicio_sesion')
 
+
 @app.route('/eliminar_cuenta')
 def eliminar_cuenta():
     if 'user_id' in session:
         return redirect('/confirmar_eliminacion')
     return redirect('/inicio_sesion')
+
 
 @app.route('/del_cuenta')
 def del_cuenta():
@@ -185,8 +218,9 @@ def del_cuenta():
         conn.commit()
         conn.close()
         session.pop('user_id', None)
-        return redirect('/registro') 
+        return redirect('/registro')
     return redirect('/inicio_sesion')
+
 
 @app.route('/confirmar_eliminacion', methods=['GET', 'POST'])
 def confirmar_eliminacion():
@@ -197,9 +231,23 @@ def confirmar_eliminacion():
         return redirect('/profile')
     return render_template('confirmar_eliminacion.html')
 
+
+@app.route('/generar_contraseña', methods=['GET', 'POST'])
+def generar_contraseña():
+    if request.method == 'POST':
+        length = request.form.get('length')
+        numbers = request.form.get('numbers')
+        letters = request.form.get('letters')
+        symbols = request.form.get('symbols')
+        password = generate_password(length, numbers, letters, symbols)
+        return render_template('generar_contraseña.html', password=password)
+    return render_template('generar_contraseña.html')
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 40
+
 
 if __name__ == '__main__':
     create_tables()

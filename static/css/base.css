@@ -1,77 +1,11 @@
-.theme-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-}
-
-.theme-toggle {
-    position: relative;
-    width: 53px;
-}
-
-.theme-toggle input[type="checkbox"] {
-    display: none;
-}
-
-.toggle-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ccc;
-    border-radius: 17px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.toggle-label:before {
-    content: "";
-    position: absolute;
-    top: 1px;
-    left: 2px;
-    width: 21px;
-    height: 21px;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-}
-
-input[type="checkbox"]:checked + .toggle-label {
+body {
     background-color: #333;
+    text-align: center;
 }
 
-input[type="checkbox"]:checked + .toggle-label:before {
-    transform: translateX(26px);
-}
-
-.dark-theme {
-    background-color: #333;
-    color: #fff;
-}
-.dark-theme h1, .dark-theme h2, .dark-theme p, .dark-theme .button, .dark-theme .site-card-back, .dark-theme label {
-    color: #fff;
-}
-
-.dark-theme .button {
-    background-color: #a04545;
-}
-.dark-theme .button:hover {
-    background-color: red;
-}
-
-.sun-icon {
-    display: inline-block;
-    margin-left: 30px;
-}
-.moon-icon {
-    display: none;
-    margin-right: 30px;
-}
-
-.dark-theme .sun-icon {
-    display: none;
-}
-.dark-theme .moon-icon {
-    display: inline-block;
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 600;
 }

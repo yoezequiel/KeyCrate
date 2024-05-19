@@ -20,6 +20,7 @@
             required />
     </div>
     <div class="password-input">
+        <label for="username">Contraseña:</label>
         <input
             type="password"
             id="password"
@@ -35,12 +36,10 @@
     </div>
     <div>
         <button type="submit">Iniciar sesión</button>
-        o
-        <a href="/registro"><button type="button">Registrarse</button></a>
     </div>
     <div>
         <a href="/recuperar_contraseña">¿Olvidaste tu contraseña?</a>
     </div>
 </form>
-<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+<p>¿No tienes una cuenta? <a href="/registro">Registrate</a></p>
 {% endblock %}

@@ -1,56 +1,24 @@
-.toggle-label {
-    border: 1px solid darkgray;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-h1 {
-    color: #333;
-    font-size: 50px;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #555;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
 ul {
     list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
 }
 
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: red;
+    background-color: #3f42ff;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #a04545;
+    background-color: #2118ff;
     color: white;
+    text-decoration: none;
 }
 
 .register-button,
@@ -60,22 +28,6 @@ a:hover {
 
 .info {
     max-width: 70ch;
-    font-size: 24px;
-}
-
-.main {
-    display: flex;
-    justify-content: center;
-}
-
-@media (max-width: 400px) {
-    .logo-container {
-        top: 1%;
-        left: 1%;
-    }
-
-    .logo-image {
-        width: 50px;
-        height: 50px;
-    }
+    font-size: 20px;
+    color: #767fff;
 }

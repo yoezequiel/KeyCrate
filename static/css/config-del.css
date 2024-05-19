@@ -1,36 +1,26 @@
-/* Estilos base */
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    text-align: center;
-}
-
-h2 {
-    margin-top: 0;
-}
-
 p {
     margin-bottom: 10px;
+    color: #f1f4ff;
 }
 
 form {
+    background-color: #18181b;
     width: 400px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: white;
 }
 
-input[type="text"]{
+input[type="text"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 3px;
     margin-bottom: 20px;
 }
 
-button[type="submit"]{
-    background-color: red;
+button[type="submit"] {
+    background-color: #3f42ff;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -40,18 +30,9 @@ button[type="submit"]{
 }
 
 button[type="submit"]:hover {
-    background-color: #a04545;
+    background-color: #2118ff;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #f44336;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-/* Estilos responsive */
 
 @media (max-width: 600px) {
     form {
@@ -67,25 +48,5 @@ button {
     button[type="submit"] {
         padding: 8px 16px;
         font-size: 14px;
-    }
-}
-
-
-@media screen and (max-width: 600px) {
-    body {
-        padding: 10px;
-    }
-
-    button {
-        padding: 8px 16px;
-    }
-    .logo-container {
-        top: 1%;
-        left: 1%;
-    }
-
-    .logo-image {
-        width: 100px;
-        height: 100px;
     }
 }

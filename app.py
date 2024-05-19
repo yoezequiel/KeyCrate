@@ -266,14 +266,24 @@ def confirmar_eliminacion():
 
 @app.route("/generar_contraseña", methods=["GET", "POST"])
 def generar_contraseña():
+    message = ""
+    password = ""
+
     if request.method == "POST":
         length = request.form.get("length")
         numbers = request.form.get("numbers")
         letters = request.form.get("letters")
         symbols = request.form.get("symbols")
-        password = generate_password(length, numbers, letters, symbols)
-        return render_template("generar_contraseña.html", password=password)
-    return render_template("generar_contraseña.html")
+        if not (numbers or letters or symbols):
+            message = (
+                "Por favor, seleccione al menos una opción para generar la contraseña."
+            )
+        else:
+            password = generate_password(length, numbers, letters, symbols)
+
+    return render_template(
+        "generar_contraseña.html", message=message, password=password
+    )
 
 
 @app.errorhandler(404)
@@ -284,4 +294,4 @@ def page_not_found(error):
 import os
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=os.environ.get("PORT", 5000), debug=True)

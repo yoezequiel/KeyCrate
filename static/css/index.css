@@ -26,6 +26,11 @@ ul {
     margin-bottom: 10px;
 }
 
+.main {
+    display: flex;
+    justify-content: center;
+}
+
 .info {
     max-width: 70ch;
     font-size: 20px;

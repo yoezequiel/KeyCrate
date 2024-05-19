@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
-
-{% block head %}
-    <title>404</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/404.css') }}">
-{% endblock head %}
-
-{% block content %}
-    <h1>¡Error 404 - Página no encontrada!</h1>
-    <p>Lo sentimos, la página que estás buscando no existe.</p>
-    <a href="/menu">¿Estás perdido?</a>
+{% extends 'base.html' %} {% block head %}
+<title>404</title>
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='css/404.css') }}" />
+{% endblock head %} {% block content %}
+<h1>¡Error 404 - Página no encontrada!</h1>
+<p>Lo sentimos, la página que estás buscando no existe.</p>
+<a href="/menu">¿Estás perdido?</a>
 {% endblock %}

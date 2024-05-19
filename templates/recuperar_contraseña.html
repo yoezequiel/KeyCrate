@@ -1,24 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block head %}
+<title>Recuper_contraseña</title>
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='css/recover-pass.css') }}" />
+{% endblock head %} {% block content %}
+<h2>Recuperar contraseña Maestra</h2>
 
-{% block head %}
-    <title>Recuper_contraseña</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recover-pass.css') }}">
-{% endblock head %}
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %} {% if success %}
+<p class="success">{{ success }}</p>
+{% endif %}
 
-{% block content %}
-    <h2>Recuperar contraseña Maestra</h2>
-
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-    {% if success %}
-        <p class="success">{{ success }}</p>
-    {% endif %}
-
-    <form method="POST">
-        <label for="username">Correo electrónico:</label>
-        <input type="email" id="username" name="username" placeholder="Ingresa tu email" required />
-        <br />
-        <input type="submit" value="Recuperar contraseña" />
-    </form>
+<form method="POST">
+    <label for="username">Correo electrónico:</label>
+    <input
+        type="email"
+        id="username"
+        name="username"
+        placeholder="Ingresa tu email"
+        required />
+    <br />
+    <input type="submit" value="Recuperar contraseña" />
+</form>
 {% endblock %}

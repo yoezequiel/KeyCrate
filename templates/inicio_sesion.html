@@ -1,34 +1,46 @@
-{% extends 'base.html' %}
-
-{% block head %}
-    <title>Iniciar Secion</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-{% endblock head %}
-
-{% block content %}
-    <h1>Iniciar sesión</h1>
-    {% if error %}
-        <p class="error-message">{{ error }}</p>
-    {% endif %}
-    <form method="POST" action="/inicio_sesion">
-        <div>
-            <label for="username">Correo Electrónico:</label>
-            <input type="email" id="username" name="username" placeholder="Ingrese su Correo Electrónico" required>
-        </div>
-        <div class="password-input">
-            <input type="password" id="password" name="password" placeholder="Ingrese contraseña Maestra" required>
-            <span class="password-toggle" onclick="togglePasswordVisibility('password')" tabindex="0">
-                <i class="far fa-eye" aria-hidden="true"></i>
-            </span>
-        </div>
-        <div>
-            <button type="submit">Iniciar sesión</button>
-            o
-            <a href="/registro"><button type="button">Registrarse</button></a>
-        </div>
-        <div>
-            <a href="/recuperar_contraseña">¿Olvidaste tu contraseña?</a>
-        </div>
-    </form>
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% extends 'base.html' %} {% block head %}
+<title>Iniciar Secion</title>
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="{{ url_for('static', filename='css/login.css') }}" />
+{% endblock head %} {% block content %}
+<h1>Iniciar sesión</h1>
+{% if error %}
+<p class="error-message">{{ error }}</p>
+{% endif %}
+<form method="POST" action="/inicio_sesion">
+    <div>
+        <label for="username">Correo Electrónico:</label>
+        <input
+            type="email"
+            id="username"
+            name="username"
+            placeholder="Ingrese su Correo Electrónico"
+            required />
+    </div>
+    <div class="password-input">
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Ingrese contraseña Maestra"
+            required />
+        <span
+            class="password-toggle"
+            onclick="togglePasswordVisibility('password')"
+            tabindex="0">
+            <i class="far fa-eye" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div>
+        <button type="submit">Iniciar sesión</button>
+        o
+        <a href="/registro"><button type="button">Registrarse</button></a>
+    </div>
+    <div>
+        <a href="/recuperar_contraseña">¿Olvidaste tu contraseña?</a>
+    </div>
+</form>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
 {% endblock %}

@@ -11,6 +11,11 @@ app = Flask(__name__)
 app = Flask(__name__, static_url_path="/static")
 app.secret_key = SECRET_KEY
 
+def render_html(template_name: str, **context):
+    if not template_name.endswith(".html"):
+        template_name += ".html"
+    return render_template(template_name, **context)
+
 
 def get_db_connection():
     conn = sqlite3.connect("KeyCrate.db")

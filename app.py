@@ -63,7 +63,7 @@ def generate_password(length, numbers, letters, symbols):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_html("index")
 
 
 @app.route("/registro", methods=["GET", "POST"])
@@ -73,8 +73,8 @@ def registro():
         password = request.form["password"]
         password = request.form["password"]
         if not username or not password:
-            return render_template(
-                "registro.html",
+            return render_html(
+                "registro",
                 error="El nombre de usuario y/o la contraseña no pueden estar vacíos.",
             )
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
@@ -84,8 +84,8 @@ def registro():
         ).fetchone()
         if user:
             conn.close()
-            return render_template(
-                "registro.html",
+            return render_html(
+                "registro",
                 error="El nombre de usuario ya está en uso. Por favor, elije otro.",
             )
         conn.execute(
@@ -99,7 +99,7 @@ def registro():
         session["user_id"] = user["id"]
         conn.close()
         return redirect("/menu")
-    return render_template("registro.html")
+    return render_html("registro")
 
 
 @app.route("/inicio_sesion", methods=["GET", "POST"])
@@ -117,8 +117,8 @@ def inicio_sesion():
         if user:
             session["user_id"] = user["id"]
             return redirect("/menu")
-        return render_template(
-            "inicio_sesion.html", error="Nombre de usuario o contraseña incorrectos."
+        return render_html(
+            "inicio_sesion", error="Nombre de usuario o contraseña incorrectos."
         )
     return render_template("inicio_sesion.html")
 
@@ -133,15 +133,15 @@ def recuperar_contraseña():
         ).fetchone()
         conn.close()
         if user:
-            return render_template(
-                "recuperar_contraseña.html",
+            return render_html(
+                "recuperar_contraseña",
                 success="Se ha enviado un correo electrónico con la contraseña.",
             )
-        return render_template(
-            "recuperar_contraseña.html",
+        return render_html(
+            "recuperar_contraseña",
             error="No se encontró ningún usuario con ese nombre de usuario.",
         )
-    return render_template("recuperar_contraseña.html")
+    return render_html("recuperar_contraseña")
 
 
 @app.route("/menu")
@@ -182,16 +182,16 @@ def menu():
             else:
                 password["logo_path"] = ""
             passwords.append(password)
-        return render_template("mostrar_contraseñas.html", passwords=passwords)
+        return render_html("mostrar_contraseñas", passwords=passwords)
     return redirect("/inicio_sesion")
 
 
 @app.route("/profile")
 def profile():
     if "user_id" in session:
-        return render_template("profile.html")
+        return render_html("profile")
     else:
-        return render_template("index.html")
+        return render_html("index")
 
 
 @app.route("/agregar_contraseña", methods=["GET", "POST"])
@@ -202,8 +202,8 @@ def agregar_contraseña():
             username = request.form["username"]
             password = request.form["password"]
             if not sitio or not username or not password:
-                return render_template(
-                    "agregar_contraseña.html",
+                return render_html(
+                    "agregar_contraseña",
                     error="Todos los campos son obligatorios y no pueden estar vacíos.",
                 )
             conn = get_db_connection()
@@ -215,7 +215,7 @@ def agregar_contraseña():
             conn.commit()
             conn.close()
             return redirect("/menu")
-        return render_template("agregar_contraseña.html")
+        return render_html("agregar_contraseña")
     return redirect("/inicio_sesion")
 
 
@@ -266,7 +266,7 @@ def confirmar_eliminacion():
         if confirmation == "eliminar":
             return redirect("/del_cuenta")
         return redirect("/profile")
-    return render_template("confirmar_eliminacion.html")
+    return render_html("confirmar_eliminacion")
 
 
 @app.route("/generar_contraseña", methods=["GET", "POST"])
@@ -286,14 +286,14 @@ def generar_contraseña():
         else:
             password = generate_password(length, numbers, letters, symbols)
 
-    return render_template(
-        "generar_contraseña.html", message=message, password=password
+    return render_html(
+        "generar_contraseña", message=message, password=password
     )
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("404.html"), 40
+    return render_html("404"), 40
 
 
 import os

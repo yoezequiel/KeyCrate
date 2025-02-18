@@ -11,6 +11,11 @@ app = Flask(__name__)
 app = Flask(__name__, static_url_path="/static")
 app.secret_key = SECRET_KEY
 
+def render_html(template_name: str, **context):
+    if not template_name.endswith(".html"):
+        template_name += ".html"
+    return render_template(template_name, **context)
+
 
 def get_db_connection():
     conn = sqlite3.connect("KeyCrate.db")
@@ -47,18 +52,19 @@ def create_tables():
 
 def generate_password(length, numbers, letters, symbols):
     password_characters = ""
-    if numbers == "on":
+    if numbers:
         password_characters += string.digits
-    if letters == "on":
+    if letters:
         password_characters += string.ascii_letters
-    if symbols == "on":
+    if symbols:
         password_characters += string.punctuation
+
     return "".join(random.choice(password_characters) for i in range(int(length)))
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_html("index")
 
 
 @app.route("/registro", methods=["GET", "POST"])
@@ -68,8 +74,8 @@ def registro():
         password = request.form["password"]
         password = request.form["password"]
         if not username or not password:
-            return render_template(
-                "registro.html",
+            return render_html(
+                "registro",
                 error="El nombre de usuario y/o la contraseña no pueden estar vacíos.",
             )
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
@@ -79,8 +85,8 @@ def registro():
         ).fetchone()
         if user:
             conn.close()
-            return render_template(
-                "registro.html",
+            return render_html(
+                "registro",
                 error="El nombre de usuario ya está en uso. Por favor, elije otro.",
             )
         conn.execute(
@@ -94,7 +100,7 @@ def registro():
         session["user_id"] = user["id"]
         conn.close()
         return redirect("/menu")
-    return render_template("registro.html")
+    return render_html("registro")
 
 
 @app.route("/inicio_sesion", methods=["GET", "POST"])
@@ -112,8 +118,8 @@ def inicio_sesion():
         if user:
             session["user_id"] = user["id"]
             return redirect("/menu")
-        return render_template(
-            "inicio_sesion.html", error="Nombre de usuario o contraseña incorrectos."
+        return render_html(
+            "inicio_sesion", error="Nombre de usuario o contraseña incorrectos."
         )
     return render_template("inicio_sesion.html")
 
@@ -128,15 +134,15 @@ def recuperar_contraseña():
         ).fetchone()
         conn.close()
         if user:
-            return render_template(
-                "recuperar_contraseña.html",
+            return render_html(
+                "recuperar_contraseña",
                 success="Se ha enviado un correo electrónico con la contraseña.",
             )
-        return render_template(
-            "recuperar_contraseña.html",
+        return render_html(
+            "recuperar_contraseña",
             error="No se encontró ningún usuario con ese nombre de usuario.",
         )
-    return render_template("recuperar_contraseña.html")
+    return render_html("recuperar_contraseña")
 
 
 @app.route("/menu")
@@ -177,16 +183,16 @@ def menu():
             else:
                 password["logo_path"] = ""
             passwords.append(password)
-        return render_template("mostrar_contraseñas.html", passwords=passwords)
+        return render_html("mostrar_contraseñas", passwords=passwords)
     return redirect("/inicio_sesion")
 
 
 @app.route("/profile")
 def profile():
     if "user_id" in session:
-        return render_template("profile.html")
+        return render_html("profile")
     else:
-        return render_template("index.html")
+        return render_html("index")
 
 
 @app.route("/agregar_contraseña", methods=["GET", "POST"])
@@ -197,8 +203,8 @@ def agregar_contraseña():
             username = request.form["username"]
             password = request.form["password"]
             if not sitio or not username or not password:
-                return render_template(
-                    "agregar_contraseña.html",
+                return render_html(
+                    "agregar_contraseña",
                     error="Todos los campos son obligatorios y no pueden estar vacíos.",
                 )
             conn = get_db_connection()
@@ -210,7 +216,7 @@ def agregar_contraseña():
             conn.commit()
             conn.close()
             return redirect("/menu")
-        return render_template("agregar_contraseña.html")
+        return render_html("agregar_contraseña")
     return redirect("/inicio_sesion")
 
 
@@ -261,34 +267,39 @@ def confirmar_eliminacion():
         if confirmation == "eliminar":
             return redirect("/del_cuenta")
         return redirect("/profile")
-    return render_template("confirmar_eliminacion.html")
+    return render_html("confirmar_eliminacion")
 
 
 @app.route("/generar_contraseña", methods=["GET", "POST"])
 def generar_contraseña():
     message = ""
     password = ""
+    MAX_LENGTH = 80
 
     if request.method == "POST":
-        length = request.form.get("length")
-        numbers = request.form.get("numbers")
-        letters = request.form.get("letters")
-        symbols = request.form.get("symbols")
-        if not (numbers or letters or symbols):
-            message = (
-                "Por favor, seleccione al menos una opción para generar la contraseña."
-            )
-        else:
-            password = generate_password(length, numbers, letters, symbols)
+        try:
+            length = int(request.form.get("length", 8))  # Longitud por defecto 8
+            length = max(4, min(length, MAX_LENGTH))
 
-    return render_template(
-        "generar_contraseña.html", message=message, password=password
-    )
+            useNumbers = request.form.get("numbers") == "on"
+            useLetters = request.form.get("letters") == "on"
+            useSymbols = request.form.get("symbols") == "on"
+
+            if not (useNumbers or useLetters or useSymbols):
+                message = ("Por favor, seleccione al menos una opción para generar la contraseña.")
+            else:
+                password = generate_password(length, useNumbers, useLetters, useSymbols)
+                
+        except ValueError:
+            message = ("Por favor, ingrese una longitud valida.")
+
+    return render_html("generar_contraseña", message=message, password=password)
+
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template("404.html"), 40
+    return render_html("404"), 40
 
 
 import os

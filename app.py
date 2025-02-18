@@ -52,12 +52,13 @@ def create_tables():
 
 def generate_password(length, numbers, letters, symbols):
     password_characters = ""
-    if numbers == "on":
+    if numbers:
         password_characters += string.digits
-    if letters == "on":
+    if letters:
         password_characters += string.ascii_letters
-    if symbols == "on":
+    if symbols:
         password_characters += string.punctuation
+
     return "".join(random.choice(password_characters) for i in range(int(length)))
 
 
@@ -273,22 +274,27 @@ def confirmar_eliminacion():
 def generar_contraseña():
     message = ""
     password = ""
+    MAX_LENGTH = 80
 
     if request.method == "POST":
-        length = request.form.get("length")
-        numbers = request.form.get("numbers")
-        letters = request.form.get("letters")
-        symbols = request.form.get("symbols")
-        if not (numbers or letters or symbols):
-            message = (
-                "Por favor, seleccione al menos una opción para generar la contraseña."
-            )
-        else:
-            password = generate_password(length, numbers, letters, symbols)
+        try:
+            length = int(request.form.get("length", 8))  # Longitud por defecto 8
+            length = max(4, min(length, MAX_LENGTH))
 
-    return render_html(
-        "generar_contraseña", message=message, password=password
-    )
+            useNumbers = request.form.get("numbers") == "on"
+            useLetters = request.form.get("letters") == "on"
+            useSymbols = request.form.get("symbols") == "on"
+
+            if not (useNumbers or useLetters or useSymbols):
+                message = ("Por favor, seleccione al menos una opción para generar la contraseña.")
+            else:
+                password = generate_password(length, useNumbers, useLetters, useSymbols)
+                
+        except ValueError:
+            message = ("Por favor, ingrese una longitud valida.")
+
+    return render_html("generar_contraseña", message=message, password=password)
+
 
 
 @app.errorhandler(404)
